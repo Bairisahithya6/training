@@ -1,0 +1,74 @@
+lists,strings,sorts.
+1.a=[2,5,7,9]
+b=[1,3,6,7,18,13]
+c=a+b
+c.sort()
+print(c)
+
+2.l1 = [1, 2, 3]
+l2 = [2, 4, 6]
+merged_list = l1 + l2
+print(merged_list)
+3.
+l1 = [1, 2, 3]
+l2 = [2, 4, 6]+++++++++++
+combined_list = [l1, l2]
+print(combined_list)
+4.
+l1 = [1,5,8,9]
+l2 = [2,7,9,10,14]
+merged_list = []
+i = 0
+j = 0
+while i < len(l1) and j < len(l2):
+    if l1[i] < l2[j]:
+        merged_list.append(l1[i])
+        i += 1
+    else:
+        merged_list.append(l2[j])
+        j += 1
+while i < len(l1):
+    merged_list.append(l1[i])
+    i += 1
+while j < len(l2):
+    merged_list.append(l2[j])
+    j += 1
+print(merged_list)
+.1
+count = 0
+for i in range(300, 401):
+    if i % 7 == 0:  
+        count += 1
+print("Count of numbers divisible by 7 between 300 and 400:", count)
+      
+. (300/7)-(400/7)
+.n=12
+for i in range(1,n+1):
+if(n%i==6):
+print(i)
+...
+def p_strength(password):
+    min_length = 8
+    c = {
+        'u': False,
+        'l': False,
+        'd': False,
+        's': False
+    }
+    s_characters = "!@#$%^&*()-_+=~`[]{}|:;'<>,.?/"
+
+    for char in password:
+        if char.isupper():
+            c['u'] = True
+        elif char.islower():
+            c['l'] = True
+        elif char.isdigit():
+            c['d'] = True
+        elif char in special_characters:
+            c['sl'] = True
+    missing_c_count = sum(1 for value in c.values() if value is False)
+    additional_characters_needed = max(0, min_length - len(p)) + missing_c_count
+    return additional_characters_needed
+p = input("Enter your password: ")
+additional_chars = p_strength(p)
+print( additional_chars)
