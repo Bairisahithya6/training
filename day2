@@ -1,0 +1,105 @@
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+number = 783
+digits = [int(digit) for digit in str(number)]
+sum_of_digits = sum(digits)
+if is_prime(sum_of_digits):
+    print(f"The sum of the digits ({sum_of_digits}) is a prime number.")
+else:
+    print(f"The sum of the digits ({sum_of_digits}) is not a prime number.")
+
+
+
+2.
+def sum_of_even_numbers(tup1, tup2):
+    def sum_even(tup):
+        if not tup:
+            return 0
+        head, *tail = tup
+        if head % 2 == 0:
+            return head + sum_even(tail)
+        else:
+            return sum_even(tail)
+    sum1 = sum_even(tup1)
+    sum2 = sum_even(tup2)
+    return (sum1, sum2)
+tuple1 = (1, 2, 3, 4, 5)
+tuple2 = (6, 7, 8, 9, 10)
+print(sum_of_even_numbers(tuple1, tuple2))  
+
+
+3.
+def sum_even_recursive(n):
+    if n < 2:
+        return 0
+    elif n % 2 == 0:
+        return n + sum_even_recursive(n - 2)
+    else:
+        return sum_even_recursive(n - 1)
+print(sum_even_recursive(10))  
+
+
+4.
+a = [5, 6, 8, 9, 5, 2, 4, 7]
+if len(a) % 2 == 0:
+    print("yes")
+else:
+    print("no")
+
+
+5.
+def count_genders(s):
+    s = s.lower()
+    male_count = s.count("male")
+    female_count = s.count("female")
+    if male_count == female_count:
+        return "0"
+    elif male_count > female_count:
+        return "m"
+    else:
+        return "f"
+input_string = "male female male male female female female"
+print(count_genders(input_string))  
+
+
+
+6.
+class Solution:
+  def removeStars(self, s: str) -> str:
+    ans = []
+    for c in s:
+      if c == '*':
+        if ans:  # Ensure there is something to pop
+          ans.pop()
+      else:
+        ans.append(c)
+    return ''.join(ans)
+solution = Solution()
+input_str = "leet**cod*e"
+output = solution.removeStars(input_str)
+print(output) 
+
+
+7.
+
+class Solution:
+  def sortSentence(self, s: str) -> str:
+    words = s.split()
+    sorted_words = sorted(words, key=lambda x: x[-1])
+    result = ' '.join([word[:-1] for word in sorted_words])
+    return result
+solution = Solution()
+input_str = "is2 sentence4 This1 a3"
+output = solution.sortSentence(input_str)
+print(output)  
+
+
+
+
+
+
