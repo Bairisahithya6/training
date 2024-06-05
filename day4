@@ -1,0 +1,286 @@
+day 4 
+
+class Node:
+    def __init__(self, u):
+        self.data = u
+        self.nxt = None
+
+a = Node(10)
+b = Node(20)
+
+print(a.data, a.nxt)
+print(b.data, b.nxt)
+
+
+
+class Node:
+    def __init__(self, u):
+        self.data = u
+        self.nxt = None
+class SLL:
+    def __init__(self):
+        self.head = None
+    def display(self):
+        t = self.head
+        while t is not None:
+            print(t.data, end="->")
+            t = t.nxt
+        print("None")
+    def addback(self, x):
+        if not self.head:
+            self.head = Node(x)
+            return
+        t = self.head
+        while t.nxt is not None:
+            t = t.nxt
+        t.nxt = Node(x)
+    def addeven(self):
+        t = self.head
+        s = 0
+        while t is not None:
+            if t.data % 2 == 0:
+                s += t.data
+            t = t.nxt
+        print(f"Sum of even elements: {s}")
+    def linear(self, value):
+        t = self.head
+        while t is not None:
+            if t.data == value:
+                return True
+            t = t.nxt
+        return False
+l1 = SLL()
+l1.addback(10)
+l1.addback(20)
+l1.addback(30)
+l1.addback(40)
+l1.addback(50)
+l1.addback(60)
+l1.addback(70)
+print("Displaying list:")
+l1.display()
+print("Adding even numbers:")
+l1.addeven()
+print("Linear search for 30:")
+print(l1.linear(30))  
+print("Linear search for 100:")
+print(l1.linear(100)) 
+
+
+class Node:
+    def __init__(self,u):
+        self.data = u
+        self.nxt = None
+class SLL:
+    def __init__(self):
+        self.head = None
+    def display(self):
+        t = self.head
+        while t is not None:
+            print(t.data, end="->")
+            t = t.nxt
+        print("None")
+    def addback(self, x):
+        if not self.head:
+            self.head = Node(x)
+            return
+        t = self.head
+        while t.nxt is not None:
+            t = t.nxt
+        t.nxt = Node(x)
+    def addeven(self):
+        t = self.head
+        s = 0
+        while t is not None:
+            if t.data % 2 == 0:
+                s += t.data
+            t = t.nxt
+        print(f"Sum of even elements: {s}")
+    def linear(self, value):
+        t = self.head
+        while t is not None:
+            if t.data == value:
+                return True
+            t = t.nxt
+        return False
+    def find_middle(self):
+        slow = self.head
+        fast = self.head
+        while fast is not None and fast.nxt is not None:
+            slow = slow.nxt
+            fast = fast.nxt.nxt
+        if slow is not None:
+            print(f"Middle element: {slow.data}")
+        else:
+            print("The list is empty.")
+l1 = SLL()
+l1.addback(10)
+l1.addback(20)
+l1.addback(40)
+l1.addback(50)
+l1.addback(60)
+l1.addback(70)
+print("Displaying list:")
+l1.display()
+print("Adding even numbers:")
+l1.addeven()
+print("Linear search for 30:")
+print(l1.linear(30))  
+print("Linear search for 100:")
+print(l1.linear(100))  
+print("Finding middle number in the list:")
+l1.find_middle()  
+
+
+
+class Node:
+    def __init__(self,u):
+        self.data = u
+        self.nxt = None
+class SLL:
+    def __init__(self):
+        self.head = None
+    def display(self):
+        t = self.head
+        while t is not None:
+            print(t.data, end="->")
+            t = t.nxt
+        print("None")
+    def addback(self, x):
+        if not self.head:
+            self.head = Node(x)
+            return
+        t = self.head
+        while t.nxt is not None:
+            t = t.nxt
+        t.nxt = Node(x)
+    def addeven(self):
+        t = self.head
+        s = 0
+        while t is not None:
+            if t.data % 2 == 0:
+                s += t.data
+            t = t.nxt
+        print(f"Sum of even elements: {s}")
+    def linear(self, value):
+        t = self.head
+        while t is not None:
+            if t.data == value:
+                return True
+            t = t.nxt
+        return False
+    def find_middle(self):
+
+
+
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def append(self, new_data):
+        new_node = Node(new_data)
+        if self.head is None:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    def print_list(self):
+        temp = self.head
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
+    def bubble_sort(self):
+        if self.head is None:
+            return
+        end = None
+        while end != self.head:
+            swapped = False
+            current = self.head
+            while current.next != end:
+                next_node = current.next
+                print(f" ({current.data}, {next_node.data})")
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                    swapped = True
+                current = current.next
+            end = current
+            if not swapped:
+                break
+ll = LinkedList()
+ll.append(6)
+ll.append(7)
+ll.append(4)
+ll.append(8)
+ll.append(2)
+ll.append(0)
+ll.append(1)
+print("Unsorted linked list:")
+ll.print_list()
+ll.bubble_sort()
+print("Sorted linked list:")
+ll.print_list()
+
+
+
+
+
+
+a = [3, 4, 5, 6, 1]
+c = 0
+for i in range(len(a) - 1):
+    f = 0
+    for j in range(len(a) - 1 - i):  
+        if a[j] > a[j + 1]:
+            f = 1
+            a[j], a[j + 1] = a[j + 1], a[j]
+            c += 1
+    if f == 0:
+        break
+print(a, c)
+
+        slow = self.head
+        fast = self.head
+        while fast is not None and fast.nxt is not None:
+            slow = slow.nxt
+            fast = fast.nxt.nxt
+        if slow is not None:
+            print(f"Middle element: {slow.data}")
+        else:
+            print("The list is empty.")
+    def check_length_even_odd(self):
+        count = 0
+        t = self.head
+        while t is not None:
+            count += 1
+            t = t.nxt
+        if count % 2 == 0:
+            print("The length of the list is even.")
+        else:
+            print("The length of the list is odd.")
+l1 = SLL()
+l1.addback(10)
+l1.addback(20)
+l1.addback(40)
+l1.addback(50)
+l1.addback(60)
+l1.addback(70)1
+print("Displaying list:")
+l1.display()
+print("Adding even numbers:")
+l1.addeven()
+print("Linear search for 30:")
+print(l1.linear(30))  
+print("Linear search for 100:")
+print(l1.linear(100)) 
+print("Finding middle number in the list:")
+l1.find_middle()
+print("Checking if the length of the list is even or odd:")
+l1.check_length_even_odd()
