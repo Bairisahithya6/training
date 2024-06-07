@@ -1,0 +1,159 @@
+day5
+
+Split a String in Balanced Strings:
+
+class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        balance = 0
+        count_balanced = 0
+        for char in s:
+            if char == 'R':
+                balance += 1
+            elif char == 'L':
+                balance -= 1
+            if balance == 0:
+                count_balanced += 1
+        return count_balanced
+solution = Solution()
+s = "RLRRLLRLRL"
+print(solution.balancedStringSplit(s))  
+
+
+decode the message:
+
+class Solution:
+    def decodeMessage(self, key: str, message: str) -> str:
+        char_map = {}
+        next_char = 'a'
+        for char in key:
+            if char.islower() and char not in char_map:
+                char_map[char] = next_char
+                next_char = chr(ord(next_char) + 1)
+        decoded_message = []
+        for char in message:
+            if char.islower():
+                decoded_message.append(char_map[char])
+            else:
+                decoded_message.append(char)
+        return ''.join(decoded_message)
+solution = Solution()
+key = "the quick brown fox jumps over the lazy dog"
+message = "vkbs bs t suepuv"
+print(solution.decodeMessage(key, message))  # Output: "this is a secret"
+
+Count the Number of Special Characters I:
+
+class Solution:
+    def numberOfSpecialChars(self, word: str) -> int:
+        l_set = set()
+        u_set = set() 
+        for char in word:
+            if char.islower():
+                l_set.add(char)
+            elif char.isupper():
+                u_set.add(char)
+        special_count = 0
+        for char in l_set:
+            if char.upper() in u_set:
+                special_count += 1
+        return special_count
+
+detect capital:
+
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        if word.isupper():
+            return True
+        if word.islower():
+            return True
+        if word[0].isupper() and word[1:].islower():
+            return True
+        return False
+  
+ Count the Number of Special Characters II:
+class Solution:
+  def numberOfSpecialChars(self, word: str) -> int:
+    lower = collections.defaultdict(bool)
+    upper = collections.defaultdict(bool)
+    for c in word:
+      if c.islower():
+        lower[c] = not upper[c.upper()]
+      else:
+        upper[c] = True
+    return sum(lower[a] and upper[b]
+               for a, b in zip(string.ascii_lowercase,
+                               string.ascii_uppercase))
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+class dll:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+    def add_front(self, x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            new_node = Node(x)
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+    def add_back(self, x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            new_node = Node(x)
+            new_node.prev = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
+    def is_even_or_odd(self):
+        slow = self.head
+        fast = self.head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        if fast is None:
+            return "even"
+        else:
+            return "odd"
+    def is_palindrome(self):
+        if self.head is None:
+            return True k
+        left = self.head
+        right = self.tail
+        while left != right and left.prev != right:
+            if left.data != right.data:
+                return False
+            left = left.next
+            right = right.prev
+        return True
+    def traverse_forward(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+    def traverse_backward(self):
+        current = self.tail
+        while current:
+            print(current.data, end=" ")
+            current = current.prev
+        print()
+doubly_linked_list = dll()
+doubly_linked_list.add_front(1)
+doubly_linked_list.add_back(2)
+doubly_linked_list.add_back(3)
+doubly_linked_list.add_back(2)
+doubly_linked_list.add_back(1)
+print("Doubly Linked List traversed forward:")
+doubly_linked_list.traverse_forward()
+print("Doubly Linked List traversed backward:")
+doubly_linked_list.traverse_backward()
+print(f"The number of nodes in the list is {doubly_linked_list.is_even_or_odd()}.")
+print(f"The list is a palindrome: {doubly_linked_list.is_palindrome()}")
