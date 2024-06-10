@@ -1,0 +1,89 @@
+day 7:
+
+write a program to print all three three possible in a list  code in python?
+using recursion in linkedlist?
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+def create_linked_list(values):
+    if not values:
+        return None
+    head = Node(values[0])
+    current = head
+    for value in values[1:]:
+        current.next = Node(value)
+        current = current.next
+    return head
+def print_triplets(head):
+    def generate_triplets(node, start, triplet):
+        if len(triplet) == 3:
+            print(triplet)
+            return
+        current = start
+        while current:
+            generate_triplets(node, current.next, triplet + [current.data])
+            current = current.next
+    current = head
+    while current:
+        generate_triplets(current, current.next, [current.data])
+        current = current.next
+values = [3, 2, 5, 4, 6, 8]
+linked_list = create_linked_list(values)
+print_triplets(linked_list)
+
+just recursion:
+
+
+def generate_t(lst, s, c_t):
+    if len(c_t) == 3:
+        print(c_t)
+        return
+    for i in range(s, len(lst)):
+        generate_t(lst, i + 1, c_t + [lst[i]])
+def print_all_t(lst):
+    generate_t(lst, 0, [])
+a = [1, 2, 3, 4, 5]
+print_all_t(a)
+_____________________________
+def fun(x):
+    if(x==1):                  output: 2 3 5 8 13 21 34 55 
+       return 1
+    if(x==2):
+        return 2
+    return fun(x-1)+fun(x-2)
+for i in range(1,10):
+    print(fun(i),end=" ")
+-------------------------------------------------------------------------------------
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True                 output:yes
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n ** 0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+def is_sum_of_two_primes(number):
+    for i in range(2, number):
+        if is_prime(i) and is_prime(number - i):
+            return "yes"
+    return "no"
+num = 12
+result = is_sum_of_two_primes(num)
+print(result)
+_________________________________________________________________________________________
+def max_sum_non_adjacent_rec(arr, n):
+    if n <= 0:
+        return 0
+    include = arr[n-1] + max_sum_non_adjacent_rec(arr, n-2)             output:30
+    exclude = max_sum_non_adjacent_rec(arr, n-1)
+    return max(include, exclude)
+def max_sum_non_adjacent(arr):
+    n = len(arr)
+    return max_sum_non_adjacent_rec(arr, n)
+input_arr = [13, 9, 4, 10, 5, 7]
+print(max_sum_non_adjacent(input_arr))
