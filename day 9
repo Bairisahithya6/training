@@ -1,0 +1,322 @@
+day-9
+
+
+class TreeNode:
+    def __init__(self, value=0, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+def preorder(root):
+    result = []
+    if root:
+        result.append(root.value)
+        result.extend(preorder(root.left))
+        result.extend(preorder(root.right))
+    return result
+def inorder(root):
+    result = []
+    if root:
+        result.extend(inorder(root.left))
+        result.append(root.value)
+        result.extend(inorder(root.right))
+    return result
+def postorder(root):
+    result = []
+    if root:
+        result.extend(postorder(root.left))
+        result.extend(postorder(root.right))
+        result.append(root.value)
+    return result
+# Constructing the binary tree
+#        1
+#       / \
+#      2   3
+#     / \  / \
+#    4  5 6    7
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+preorder = preorder(root)
+inorder = inorder(root)
+_______________________________________________________________________________________________
+class node:
+    def __init__(self, u):
+        self.data = u
+        self.left = None
+        self.right = None
+class tree:
+    def __init__(self):
+        self.root = None
+    def create(self, root, x):
+        if root is None:
+            return node(x)
+        elif x < root.data:
+            root.left = self.create(root.left, x)
+        else:
+            root.right = self.create(root.right, x)
+        return root
+    def inorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.inorder(root.left, re)
+            re.append(root.data)
+            self.inorder(root.right, re)
+        return re
+    def preorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            re.append(root.data)
+            self.preorder(root.left, re)
+            self.preorder(root.right, re)
+        return re
+    def postorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.postorder(root.left, re)
+            self.postorder(root.right, re)
+            re.append(root.data)
+        return re
+    def sum_tree(self, root):
+        if root is None:
+            return 0
+        return root.data + self.sum_tree(root.left) + self.sum_tree(root.right)
+    def sum_even(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_even(root.left)
+        sum_right = self.sum_even(root.right)
+        return (root.data if root.data % 2 == 0 else 0) + sum_left + sum_right
+    def sum_odd(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_odd(root.left)
+        sum_right = self.sum_odd(root.right)
+        return (root.data if root.data % 2 != 0 else 0) + sum_left + sum_right
+    def diff_eo(self, root):
+        even_sum = self.sum_even(root)
+        odd_sum = self.sum_odd(root)
+        return even_sum - odd_sum
+    def height(self, root):
+        if root is None:
+            return -1
+        left_height = self.height(root.left)
+        right_height = self.height(root.right)
+        return max(left_height, right_height) + 1
+    def balanced(self, root):
+        if root is None:
+            return 0
+        left = self.balanced(root.left)
+        right = self.balanced(root.right)
+        return abs(left - right) <= 1
+    def leaf_node(self, root):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return 1
+        return self.leaf_node(root.left) + self.leaf_node(root.right)
+    def sum_leaf_nodes(self, root):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return root.data
+        return self.sum_leaf_nodes(root.left) + self.sum_leaf_nodes(root.right)
+    def search(self, root, key):
+        if root is None or root.data == key:
+            return root
+        if key < root.data:
+            return self.search(root.left, key)
+        return self.search(root.right, key)
+t1 = tree()
+t1.root = t1.create(t1.root, 10)
+t1.root = t1.create(t1.root, 5)
+t1.root = t1.create(t1.root, 15)
+t1.root = t1.create(t1.root, 2)
+t1.root = t1.create(t1.root, 7)
+t1.root = t1.create(t1.root, 1)
+t1.root = t1.create(t1.root, 3)
+print("Inorder:", t1.inorder(t1.root))
+print("Preorder:", t1.preorder(t1.root))
+print("Postorder:", t1.postorder(t1.root))
+print("Sum of all nodes:", t1.sum_tree(t1.root))
+print("Sum of left nodes:", t1.sum_tree(t1.root.left))
+print("Sum of even nodes:", t1.sum_even(t1.root))
+print("Sum of odd nodes:", t1.sum_odd(t1.root))
+print("Difference between even and odd sums:", t1.diff_eo(t1.root))
+print("Height of the tree:", t1.height(t1.root))
+print("Balanced tree check:", t1.balanced(t1.root))
+print("Count of leaf nodes:", t1.leaf_node(t1.root))
+print("Sum of leaf nodes:", t1.sum_leaf_nodes(t1.root))
+search_key = 7
+found_node = t1.search(t1.root, search_key)
+if found_node:
+    print(f"Node with data {search_key} found.")
+else:
+    print(f"Node with data {search_key} not found.")
+_________________________________________________________________________________________________________
+postorder = postorder(root)
+print("Preorder: ", preorder)  
+print("Inorder: ", inorder)    
+print("Postorder: ", postorder)  
+_____________________________________________________________________________________________________
+class node:
+    def __init__(self, u):
+        self.data = u
+        self.left = None
+        self.right = None
+class tree:
+    def __init__(self):
+        self.root = None
+    def create(self, root, x):
+        if root is None:
+            return node(x)
+        elif x < root.data:
+            root.left = self.create(root.left, x)
+        else:
+            root.right = self.create(root.right, x)
+        return root
+    def inorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:    
+            self.inorder(root.left, re)
+            re.append(root.data)
+            self.inorder(root.right, re)
+        return re
+    def preorder(self, root, re=None):
+        if re is None: 
+            re = []
+        if root:
+            re.append(root.data)
+            self.preorder(root.left, re)
+            self.preorder(root.right, re)
+        return re
+    def postorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.postorder(root.left, re)
+            self.postorder(root.right, re)
+            re.append(root.data)
+        return re
+
+    def sum_tree(self, root):
+        if root is None:
+            return 0
+        return root.data + self.sum_tree(root.left) + self.sum_tree(root.right)
+    def sum_even(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_even(root.left)
+        sum_right = self.sum_even(root.right)
+        return (root.data if root.data % 2 == 0 else 0) + sum_left + sum_right
+    def sum_odd(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_odd(root.left)
+        sum_right = self.sum_odd(root.right)
+        return (root.data if root.data % 2 != 0 else 0) + sum_left + sum_right
+t1 = tree()
+t1.root = t1.create(t1.root, 10)
+t1.root = t1.create(t1.root, 5)
+t1.root = t1.create(t1.root, 15)
+t1.root = t1.create(t1.root, 2)
+t1.root = t1.create(t1.root, 7)
+t1.root = t1.create(t1.root, 1)
+t1.root = t1.create(t1.root, 3)
+print("Inorder:", t1.inorder(t1.root))
+print("Preorder:", t1.preorder(t1.root))
+print("Postorder:", t1.postorder(t1.root))
+print("Sum of all nodes:", t1.sum_tree(t1.root))
+print("Sum of even nodes:", t1.sum_even(t1.root))
+print("Sum of odd nodes:", t1.sum_odd(t1.root))
+___________________________________________________________________________________________________
+
+class node:
+    def __init__(self, u):
+        self.data = u
+        self.left = None
+        self.right = None
+class tree:
+    def __init__(self):
+        self.root = None
+    def create(self, root, x):
+        if root is None:
+            return node(x)
+        elif x < root.data:
+            root.left = self.create(root.left, x)
+        else:
+            root.right = self.create(root.right, x)
+        return root
+    def inorder(self, root, re=None):
+        if re is None:a
+            re = []
+        if root:
+            self.inorder(root.left, re)
+            re.append(root.data)
+            self.inorder(root.right, re)
+        return re
+    def preorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            re.append(root.data)
+            self.preorder(root.left, re)
+            self.preorder(root.right, re)
+        return re
+    def postorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.postorder(root.left, re)
+            self.postorder(root.right, re)
+            re.append(root.data)
+        return re
+    def sum_tree(self, root):
+        if root is None:
+            return 0
+        return root.data + self.sum_tree(root.left) + self.sum_tree(root.right)
+    def sum_even(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_even(root.left)
+        sum_right = self.sum_even(root.right)
+        return (root.data if root.data % 2 == 0 else 0) + sum_left + sum_right
+    def sum_odd(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_odd(root.left)
+        sum_right = self.sum_odd(root.right)
+        return (root.data if root.data % 2 != 0 else 0) + sum_left + sum_right
+    def diff_eo(self, root):
+        even_sum = self.sum_even(root)
+        odd_sum = self.sum_odd(root)
+        return even_sum - odd_sum
+    def height(self, root):
+        if root is None:
+            return 0
+        left_height = self.height(root.left)
+        right_height = self.height(root.right)
+        return max(left_height, right_height) + 1
+t1 = tree()
+t1.root = t1.create(t1.root, 10)
+t1.root = t1.create(t1.root, 5)
+t1.root = t1.create(t1.root, 15)
+t1.root = t1.create(t1.root, 2)
+t1.root = t1.create(t1.root, 7)
+t1.root = t1.create(t1.root, 1)
+t1.root = t1.create(t1.root, 3)
+print("Inorder:", t1.inorder(t1.root))
+print("Preorder:", t1.preorder(t1.root))
+print("Postorder:", t1.postorder(t1.root))
+print("Sum of all nodes:", t1.sum_tree(t1.root))
+print("Sum of left nodes:", t1.sum_tree(t1.root.left))
+print("Sum of even nodes:", t1.sum_even(t1.root))
+print("Sum of odd nodes:", t1.sum_odd(t1.root))
+print("Difference between even and odd sums:", t1.diff_eo(t1.root))
+print("Height of the tree:", t1.height(t1.root))
+
