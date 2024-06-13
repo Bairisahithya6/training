@@ -1,0 +1,26 @@
+day 8:
+
+
+def split_list(a):                            output: [[1, 2, 3, 4], [1, 2, 3], [1, 2]]
+    result = []
+    c_sublist = []
+    for i in range(len(a)):
+        c_sublist.append(a[i])
+        if i == len(a) - 1 or a[i + 1] <= a[i]:
+            result.append(c_sublist)
+            c_sublist = []
+    return result
+a = [1, 2, 3, 4, 1, 2, 3, 1, 2]
+output = split_list(a)
+print(output)
+________________________________________________________________
+def is_pangram(s):
+    a = set("abcdefghijklmnopqrstuvwxyz")
+    s_set = set(s.lower())                                   output:yes
+    return a.issubset(s_set) 
+input_s= "the quick brown fox jumps over the lazy dog"
+output = "yes" if is_pangram(input_s) else "no"
+print(output)
+
+
+
