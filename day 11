@@ -1,0 +1,63 @@
+day 11
+
+
+d={5:[7,3],7:[5,4,3],4:[7,8,2],8:[4,3,2],3:[5,7,8],2:[4,8]}?
+
+
+def depth(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start) 
+    print(start, end=' ')
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            depth(graph, neighbor, visited)
+    return visited
+graph = {
+    5: [7, 3],
+    7: [5, 4, 3],
+    4: [7, 8, 2],
+    8: [4, 3, 2],
+    3: [5, 7, 8],
+    2: [4, 8]
+}
+depth(graph, 5)
+___________________________________________________________________
+def find_all_paths(graph, start, end, path=None):
+    if path is None:
+        path = []
+    path = path + [start]  
+    if start == end:
+        return [path]  
+    paths = []  
+    for node in graph[start]:
+        if node not in path:  
+            new_paths = find_all_paths(graph, node, end, path)  # Recur for all adjacent nodes
+            for p in new_paths:
+                paths.append(p)
+    return paths
+graph = {
+    5: [7, 3],
+    3: [5, 7, 8],
+    7: [5, 3, 4],
+    4: [7, 8, 2],
+    8: [3, 4, 2],
+    2: [4, 8]
+}
+start_node = 5
+end_node = 2
+all_paths = find_all_paths(graph, start_node, end_node)
+print(f"All paths from {start_node} to {end_node}:")
+for path in all_paths:
+    print(path)                                                     output:All paths from 5 to 2:
+                                                                          [5, 7, 3, 8, 4, 2]
+                                                                         [5, 7, 3, 8, 2]
+                                                                          [5, 7, 4, 8, 2]
+                                                                             [5, 7, 4, 2]
+                                                                           [5, 3, 7, 4, 8, 2]
+                                                                              [5, 3, 7, 4, 2]
+                                                                            [5, 3, 8, 4, 2]
+                                                                              [5, 3, 8, 2]
+
+
+
