@@ -1,0 +1,129 @@
+day 15 :
+1 means inserting
+2 means searching
+ip: 5
+1 school
+1 world
+1 word
+1 scholar
+2 word
+2 wood
+3 sch
+op: true
+false
+true?
+
+def insert(word_list, word):
+    word_list.append(word)
+def search(word_list, word):
+    if not word_list:
+        return False
+    if word_list[0] == word:
+        return True
+    return search(word_list[1:], word)
+def starts_with(word_list, prefix):
+    if not word_list:
+        return False
+    if word_list[0].startswith(prefix):
+        return True
+    return starts_with(word_list[1:], prefix)
+word_list = []
+insert(word_list, "school")
+insert(word_list, "world")
+insert(word_list, "word")
+insert(word_list, "scholar")
+search_results = [
+    search(word_list, "word"),    
+    search(word_list, "wood"),    
+    starts_with(word_list, "sch") 
+]
+for result in search_results:
+    print(result)
+_____________________________
+def i(word, w):
+    word.append(w)     output: 2
+def s(word, w):
+    if not word:
+        return 0
+    return (1 if word[0] == w else 0) + s(word[1:], w)
+def starts_with(word, prefix):
+    if not word:
+        return 0
+    return (1 if word[0].startswith(prefix) else 0) + starts_with(word[1:], prefix)
+word = []
+i(word, "word")
+i(word, "words")
+search_results = [  
+    starts_with(word, "wo") 
+]
+for result in search_results:
+    print(result)
+__________________________________________________________________________
+1. go to root trie,check char is available 
+   1.lif not available, add the char to dict and creat a empty trie
+   1.2 if available , go to the reference trie.
+2. if there are not char then make ur current trie flag as 1
+_____________________________________________________________________
+word
+world
+wood
+words
+apple
+aapricot
+[b,ba,wo,ap]
+print the prefix from the given list who has longest string in the trie?
+
+class Node:
+    def __init__(self):
+        self.d = {}
+        self.flag = 0
+class Tries:
+    def __init__(self):
+        self.root = Node()
+    def insert(self, word):
+        t = self.root
+        for char in word:
+            if char not in t.d:
+                t.d[char] = Node()
+            t = t.d[char]
+        t.flag = 1
+    def search(self, word):
+        t = self.root
+        for char in word:
+            if char not in t.d:
+                return False
+            t = t.d[char]
+        return t.flag
+    def start(self, prefix):
+        t = self.root
+        for char in prefix:
+            if char not in t.d:
+                return False, []
+            t = t.d[char]
+        words = []
+        self._collect_words(t, prefix, words)
+        return True, words
+    def _collect_words(self, node, prefix, words):
+        if node.flag:
+            words.append(prefix)
+        for char, next_node in node.d.items():
+            self._collect_words(next_node, prefix + char, words)
+    def find_longest_match(self, prefixes):
+        longest_match = ""
+        longest_word = ""
+        for prefix in prefixes:
+            found, words = self.start(prefix)
+            if found:
+                for word in words:
+                    if len(word) > len(longest_word):
+                        longest_word = word
+                        longest_match = prefix
+        return longest_match, longest_word
+t1 = Tries()
+words = ["word", "world", "wood", "words", "apple", "apricot"]
+for word in words:
+    t1.insert(word)
+prefixes = ["b", "ba", "wo", "ap"]
+longest_match, longest_word = t1.find_longest_match(prefixes)
+print(f"The prefix with the longest matching string is '{longest_match}' with the word '{longest_word}'")
+
