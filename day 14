@@ -1,0 +1,184 @@
+day 14
+def n_queens(n):
+    def is_safe(board, row, col):
+        for i in range(col):
+            if board[row][i] == 1:
+                return False
+        for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+            if board[i][j] == 1:
+                return False
+        for i, j in zip(range(row, n, 1), range(col, -1, -1)):
+            if board[i][j] == 1:
+                return False
+        return True
+    def solve(board, col):
+        if col >= n:
+            return True
+        for i in range(n):
+            if is_safe(board, i, col):
+                board[i][col] = 1
+                if solve(board, col + 1):
+                    return True
+                board[i][col] = 0
+        return False
+    def print_solution(board):
+        for row in board:
+            print(" ".join('Q' if x == 1 else '.' for x in row))
+    board = [[0 for _ in range(n)] for _ in range(n)]
+    if not solve(board, 0):
+        print("Solution does not exist")
+        return False
+    print_solution(board)
+    return True
+n_queens(8)
+__________________________
+def n_queens(n):
+    count = [0]  
+    def is_safe(board, row, col):
+        for i in range(col):
+            if board[row][i] == 1:
+                return False
+        for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+            if board[i][j] == 1:
+_______________________________________________________________________________________
+def longest_palindromic_substring(s):
+    if s == "":
+        return ""
+    def expand_around_center(s, left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left + 1:right]
+    start, end = 0, 0
+    for i in range(len(s)):
+        len1 = len(expand_around_center(s, i, i))
+        len2 = len(expand_around_center(s, i, i + 1))
+        max_len = max(len1, len2)
+        if max_len > end - start:
+            start = i - (max_len - 1) // 2
+            end = i + max_len // 2
+    return s[start:end + 1]
+user_input = input("Enter a string: ")
+print("Longest Palindromic Substring:", longest_palindromic_substring(user_input))
+                return False
+        for i, j in zip(range(row, n, 1), range(col, -1, -1)):
+            if board[i][j] == 1:
+                return False
+        return True
+    def solve(board, col):
+        if col >= n:
+            return True
+        for i in range(n):
+            if is_safe(board, i, col):
+                board[i][col] = 1
+                count[0] += 1  
+                if solve(board, col + 1):
+                    return True
+                board[i][col] = 0
+                count[0] -= 1  
+        return False
+    def print_solution(board):
+        for row in board:
+            print(" ".join('Q' if x == 1 else '.' for x in row))
+    board = [[0 for _ in range(n)] for _ in range(n)]
+    if not solve(board, 0):
+        print("Solution does not exist")
+        return False
+    print_solution(board)
+    print(f"Number of queens placed: {count[0]}")
+    return True
+n_queens(8)                     
+output:
+Q . . . . . . .
+. . . . . . Q .
+. . . . Q . . .
+. . . . . . . Q
+. Q . . . . . .
+. . . Q . . . .
+. . . . . Q . .
+. . Q . . . . .
+Number of queens placed: 8
+_______________________________________________________________________
+def sun(n):
+    if not n:
+        return "input array is empty"
+    mrng=[]
+    evng=[]
+    max_h=float('-inf')
+    for h in n:
+        if h > max_h:
+            mrng.append(h)
+            max_h=h
+    max_h=float('-inf')
+    for h in reversed(n):
+        if h > max_h:
+            evng.insert(0, h) 
+            max_h=h
+    return {
+        "mrng":mrng,
+        "evng":evng
+    }
+a=[3,5,9,6,8,10]
+output=sun(a)
+print(output)
+________________________________________________________________
+def is_palindrome(num):
+    return str(num) == str(num)[::-1]
+
+def next_palindrome(num):
+    while True:
+        num += 1
+        if is_palindrome(num):
+            return num
+
+def find_or_next_palindrome(num):
+    if is_palindrome(num):
+        return num
+    else:
+        return next_palindrome(num)
+
+# Example usage
+num = 123
+result = find_or_next_palindrome(num)
+print(f"The palindrome result for {num} is: {result}")
+
+num = 121
+result = find_or_next_palindrome(num)
+print(f"The palindrome result for {num} is: {result}")
+
+_______________________________________________________________________
+import re
+
+def extract_numbers(s):
+    return re.findall(r'\d+', s)
+
+def find_largest_even_number(str1, str2):
+    nums1 = extract_numbers(str1)
+    nums2 = extract_numbers(str2)
+    
+    # Combine the numbers and convert them to integers
+    combined_numbers = list(map(int, nums1 + nums2))
+    
+    # Get unique numbers
+    unique_numbers = list(set(combined_numbers))
+    
+    # Filter out the even numbers
+    even_numbers = [num for num in unique_numbers if num % 2 == 0]
+    
+    # Find the largest even number
+    if even_numbers:
+        largest_even_number = max(even_numbers)
+    else:
+        largest_even_number = None
+    
+    return largest_even_number
+
+# Example input
+str1 = "tu5g2k1h8"
+str2 = "g5g8gd6h3"
+
+# Find the largest even number
+largest_even_number = find_largest_even_number(str1, str2)
+print("Largest even number:", largest_even_number)
+the output must be :865312
+
